@@ -47,8 +47,10 @@ gsap.to(sequence, {
     start: "top top",
     end: "bottom top",
     scrub: true,
-    pin: ".viewer"
-  },
+    pin: ".viewer",
+  anticipatePin: 1,
+  invalidateOnRefresh: true
+}
   onUpdate: render
 });
 
