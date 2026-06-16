@@ -101,3 +101,20 @@ canvas.addEventListener("click", (e) => {
     y: Number(y.toFixed(3))
   });
 });
+
+window.addEventListener("load", () => {
+  ScrollTrigger.refresh();
+  render();
+});
+
+window.addEventListener("resize", () => {
+  ScrollTrigger.refresh();
+  render();
+});
+
+window.addEventListener("orientationchange", () => {
+  setTimeout(() => {
+    ScrollTrigger.refresh();
+    render();
+  }, 500);
+});
