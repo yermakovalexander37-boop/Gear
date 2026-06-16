@@ -3,7 +3,7 @@ gsap.registerPlugin(ScrollTrigger);
 const canvas = document.getElementById("sequence");
 const context = canvas.getContext("2d");
 
-const frameCount = 251; // поменять на свое количество кадров
+const frameCount = 250; // поменять на свое количество кадров
 const currentFrame = index =>
   `frames/frame_${String(index + 1).padStart(4, "0")}.jpg`;
 
@@ -45,29 +45,39 @@ gsap.to(sequence, {
   scrollTrigger: {
     trigger: ".hero",
     start: "top top",
-    end: "bottom bottom",
-    scrub: true
+    end: "bottom top",
+    scrub: true,
+    pin: ".viewer"
   },
   onUpdate: render
 });
 
 function render() {
-  const img = images[sequence.frame];
-  if (!img || !img.complete) return;
+  const frameIndex = Math.min(
+    frameCount - 1,
+    Math.max(0, Math.round(sequence.frame))
+  );
+
+  const img = images[frameIndex];
+
+  if (!img || !img.complete || img.naturalWidth === 0) {
+    console.warn("Frame not loaded:", frameIndex, currentFrame(frameIndex));
+    return;
+  }
 
   context.clearRect(0, 0, canvas.width, canvas.height);
   context.drawImage(img, 0, 0, canvas.width, canvas.height);
-  
-  updateHotspots();
+
+  updateHotspots(frameIndex);
 }
 
 const hotspotLayer = document.getElementById("hotspots");
 
-function updateHotspots() {
+function updateHotspots(frameIndex) {
   hotspotLayer.innerHTML = "";
 
   hotspots.forEach(hotspot => {
-    if (sequence.frame >= hotspot.frameStart && sequence.frame <= hotspot.frameEnd) {
+    if (frameIndex >= hotspot.frameStart && frameIndex <= hotspot.frameEnd) {
       const el = document.createElement("div");
       el.className = "hotspot";
       el.style.left = `${hotspot.x * 100}%`;
