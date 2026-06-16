@@ -42,15 +42,15 @@ gsap.to(sequence, {
   frame: frameCount - 1,
   snap: "frame",
   ease: "none",
-  scrollTrigger: {
-    trigger: ".hero",
-    start: "top top",
-    end: "bottom top",
-    scrub: true,
-    pin: ".viewer",
+ scrollTrigger: {
+  trigger: ".hero",
+  start: "top top",
+  end: "bottom top",
+  scrub: true,
+  pin: ".viewer",
   anticipatePin: 1,
   invalidateOnRefresh: true
-}
+},
   onUpdate: render
 });
 
