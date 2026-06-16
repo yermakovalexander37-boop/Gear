@@ -6,12 +6,10 @@ body {
 }
 
 .hero {
-  height: 400vh;
+  height: 250vh;
 }
 
 .viewer {
-  position: sticky;
-  top: 0;
   width: 100vw;
   height: 100vh;
 
@@ -20,27 +18,15 @@ body {
   justify-content: center;
 }
 
-#sequence {
+.stage {
+  position: relative;
   width: min(100vw, 100vh);
   height: min(100vw, 100vh);
-  display: block;
-}
-
-.content {
-  padding: 80px;
-  background: #111;
-}
-.viewer {
-  position: sticky;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
 }
 
 #sequence {
   width: 100%;
   height: 100%;
-  object-fit: contain;
   display: block;
 }
 
@@ -62,20 +48,33 @@ body {
   cursor: pointer;
 }
 
-.stage {
-  position: relative;
-  width: min(100vw, 100vh);
-  height: min(100vw, 100vh);
-}
-
-#sequence {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-#hotspots {
+.overlay-text {
   position: absolute;
-  inset: 0;
+  top: 32px;
+  left: 40px;
+  z-index: 20;
+
+  max-width: 420px;
+  color: white;
   pointer-events: none;
+}
+
+.overlay-text h1 {
+  margin: 0 0 8px;
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+.overlay-text p {
+  margin: 0;
+  font-size: 16px;
+  opacity: 0.75;
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  overflow-x: hidden;
 }
